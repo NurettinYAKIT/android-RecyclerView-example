@@ -1,5 +1,6 @@
 package com.example.nurettinyakit.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,7 +65,6 @@ public class MainActivity extends AppCompatActivity
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
 
-
         stockList = StockModel.prepareData();
 
         RecyclerView.Adapter adapter = new DataAdapter(getApplicationContext(),stockList);
@@ -89,8 +90,10 @@ public class MainActivity extends AppCompatActivity
                     int position = rv.getChildAdapterPosition(child);
 
                     StockItem item = stockList.get(position);
+                    StockModel.setRecentItem(item);
 
-                    Toast.makeText(getApplicationContext(), item.getItemName(), Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(MainActivity.this, CardDetails.class);
+                    startActivity(intent);
 
 
                 }

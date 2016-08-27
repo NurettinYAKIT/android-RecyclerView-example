@@ -5,11 +5,29 @@ package com.example.nurettinyakit.model;
  */
 public class StockItem {
 
+    private String UUID;
+
     private String name;
     private String imageUrl;
     private String price;
     private String description;
+    private String category;
 
+    public String getUUID() {
+        return UUID;
+    }
+
+    public void setUUID(String UUID) {
+        this.UUID = UUID;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
 
     public String getItemImageUrl() {
         return imageUrl;

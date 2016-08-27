@@ -7,6 +7,18 @@ import java.util.ArrayList;
  */
 public class StockModel {
 
+    private static ArrayList stockList;
+    private static StockItem recentItem;
+
+    private static String itemUUIDs[] = {
+            "111111",
+            "222222",
+            "333333",
+            "444444",
+            "555555",
+            "666666"
+    };
+
     private static String itemNames[] = {
             "MacBook Gold",
             "MacBook",
@@ -47,17 +59,37 @@ public class StockModel {
 
     public static ArrayList prepareData(){
 
-        ArrayList stockList = new ArrayList<>();
+        stockList = new ArrayList<>();
         for(int i=0;i<itemNames.length;i++){
             StockItem item = new StockItem();
             item.setItemName(itemNames[i]);
             item.setItemImageUrl(itemUrls[i]);
             item.setItemPrice(itemPrices[i]);
             item.setDescription(itemDescriptions[i]);
+            item.setUUID(itemUUIDs[i]);
 
             stockList.add(item);
         }
         return stockList;
+    }
+
+    public static StockItem getItem(String uuid){
+
+        int id =0;
+        for(int i =0; i<itemUUIDs.length; i++){
+            if(uuid==itemUUIDs[i]){
+                id=i;
+            }
+        }
+        return (StockItem)stockList.get(id);
+    }
+
+    public static StockItem getRecentItem() {
+        return recentItem;
+    }
+
+    public static void setRecentItem(StockItem recentItem) {
+        StockModel.recentItem = recentItem;
     }
 
 }
