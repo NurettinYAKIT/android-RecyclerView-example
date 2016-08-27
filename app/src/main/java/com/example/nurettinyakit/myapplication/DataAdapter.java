@@ -1,10 +1,15 @@
 package com.example.nurettinyakit.myapplication;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.nurettinyakit.model.StockItem;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -13,10 +18,12 @@ import java.util.ArrayList;
  */
 public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
 
-    private ArrayList<String> countries;
+    private ArrayList<StockItem> data;
+    private Context context;
 
-   public DataAdapter(ArrayList<String> param){
-       this.countries = param;
+   public DataAdapter(Context context,ArrayList<StockItem> data){
+       this.data = data;
+       this.context = context;
    }
 
     @Override
@@ -28,21 +35,32 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.tv_country.setText(countries.get(position));
+
+        Picasso.with(this.context).load(data.get(position).getItemImageUrl()).resize(120,60).into(holder.ivCardImage);
+
+        holder.tvCardName.setText(data.get(position).getItemName());
+        holder.tvCardPrice.setText(data.get(position).getItemPrice());
+        holder.tvCardDesctiption.setText(data.get(position).getDescription());
     }
 
     @Override
     public int getItemCount() {
-        return countries.size();
+        return data.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        private TextView tv_country;
+        ImageView ivCardImage;
+        TextView tvCardName;
+        TextView tvCardPrice;
+        TextView tvCardDesctiption;
 
         public ViewHolder(View view) {
             super(view);
 
-            tv_country = (TextView)view.findViewById(R.id.tv_country);
+            tvCardName = (TextView)view.findViewById(R.id.tv_card_name);
+            ivCardImage = (ImageView)view.findViewById(R.id.iv_card_image);
+            tvCardPrice = (TextView)view.findViewById(R.id.tv_card_price);
+            tvCardDesctiption = (TextView)view.findViewById(R.id.tv_card_description);
         }
     }
 

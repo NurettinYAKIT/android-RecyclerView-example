@@ -18,12 +18,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.nurettinyakit.model.StockItem;
+import com.example.nurettinyakit.model.StockModel;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    ArrayList<String> countries;
+    ArrayList<StockItem> stockList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,15 +63,10 @@ public class MainActivity extends AppCompatActivity
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
 
-        countries = new ArrayList<>();
 
-        countries.add("Australia");
-        countries.add("India");
-        countries.add("America");
-        countries.add("Germany");
-        countries.add("Russia");
+        stockList = StockModel.prepareData();
 
-        RecyclerView.Adapter adapter = new DataAdapter(countries);
+        RecyclerView.Adapter adapter = new DataAdapter(getApplicationContext(),stockList);
         recyclerView.setAdapter(adapter);
 
         recyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
@@ -90,7 +88,11 @@ public class MainActivity extends AppCompatActivity
                 if (child!=null && detector.onTouchEvent(e)){
                     int position = rv.getChildAdapterPosition(child);
 
-                    Toast.makeText(getApplicationContext(), countries.get(position), Toast.LENGTH_SHORT).show();
+                    StockItem item = stockList.get(position);
+
+                    Toast.makeText(getApplicationContext(), item.getItemName(), Toast.LENGTH_SHORT).show();
+
+
                 }
 
                 return false;
