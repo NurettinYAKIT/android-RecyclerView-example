@@ -7,13 +7,13 @@ import java.util.ArrayList;
  */
 public class CartModel {
 
-    ArrayList<StockItem> itemsInCart;
+    static ArrayList<StockItem> itemsInCart;
 
-    public ArrayList<StockItem> getItemsInCart() {
+    public static ArrayList<StockItem> getItemsInCart() {
         return itemsInCart;
     }
 
-    public void addItem(StockItem item){
+    public static void addItem(StockItem item){
         if(itemsInCart!=null){
             itemsInCart.add(item);
         }else{
@@ -29,6 +29,25 @@ public class CartModel {
             itemsInCart = new ArrayList<>();
             itemsInCart.add(StockModel.getItem(uuid));
         }
+    }
+
+
+    public static void removeItem(StockItem item){
+        if(itemsInCart!=null&&itemsInCart.contains(item)){
+            itemsInCart.remove(item);
+        }
+    }
+
+    public void removeItem(String uuid){
+        if(itemsInCart!=null&&uuid!=null){
+            for (StockItem i:itemsInCart) {
+                if(i.getUUID()==uuid){
+                    itemsInCart.remove(i);
+                    break;
+                }
+            }
+        }
+
     }
 
 

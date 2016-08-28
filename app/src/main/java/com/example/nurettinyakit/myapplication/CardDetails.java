@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.example.nurettinyakit.model.CartModel;
 import com.example.nurettinyakit.model.StockItem;
 import com.example.nurettinyakit.model.StockModel;
 import com.squareup.picasso.Picasso;
@@ -47,6 +48,8 @@ public class CardDetails extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, stockItem.getItemName() + " added to your cart", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
+                CartModel.addItem(stockItem);
             }
         });
     }

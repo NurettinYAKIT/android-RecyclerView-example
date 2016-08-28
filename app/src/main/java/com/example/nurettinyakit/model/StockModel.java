@@ -77,7 +77,7 @@ public class StockModel {
 
         int id =0;
         for(int i =0; i<itemUUIDs.length; i++){
-            if(uuid==itemUUIDs[i]){
+            if(uuid.equals(itemUUIDs[i])){
                 id=i;
             }
         }
