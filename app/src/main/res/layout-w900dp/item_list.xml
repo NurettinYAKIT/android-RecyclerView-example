@@ -27,7 +27,7 @@
         android:layout_marginRight="16dp"
         app:layoutManager="LinearLayoutManager"
         tools:context=".CartListActivity"
-        tools:listitem="@layout/item_list_content" />
+        tools:listitem="@layout/cart_item_content" />
 
     <FrameLayout
         android:id="@+id/item_detail_container"

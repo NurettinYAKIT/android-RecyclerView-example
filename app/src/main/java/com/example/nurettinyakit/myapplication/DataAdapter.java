@@ -36,7 +36,11 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
-        Picasso.with(this.context).load(data.get(position).getItemImageUrl()).resize(120,60).into(holder.ivCardImage);
+        int tumbWidth = this.context.getResources().getInteger(R.integer.tumbnail_width);
+        int tumbHeight = this.context.getResources().getInteger(R.integer.tumbnail_height);
+
+
+        Picasso.with(this.context).load(data.get(position).getItemImageUrl()).resize(tumbWidth,tumbHeight).into(holder.ivCardImage);
 
         holder.tvCardName.setText(data.get(position).getItemName());
         holder.tvCardPrice.setText(data.get(position).getItemPrice());

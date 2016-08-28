@@ -50,6 +50,9 @@ public class CardDetails extends AppCompatActivity {
                         .setAction("Action", null).show();
 
                 CartModel.addItem(stockItem);
+
+                    finish();
+
             }
         });
     }

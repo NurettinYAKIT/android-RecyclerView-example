@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
+import android.widget.ImageButton;
 
 import com.example.nurettinyakit.model.CartModel;
 import com.example.nurettinyakit.model.StockItem;
@@ -24,7 +25,7 @@ import com.example.nurettinyakit.model.StockModel;
 public class ItemDetailActivity extends AppCompatActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
@@ -48,6 +49,9 @@ public class ItemDetailActivity extends AppCompatActivity {
 
                     Snackbar.make(view, "Removed from Cart", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
+
+                    //Activity i sonlandirir.
+                    finish();
                 }else {
                     Snackbar.make(view, "First you should add this item to your cart", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
@@ -83,6 +87,7 @@ public class ItemDetailActivity extends AppCompatActivity {
                     .add(R.id.item_detail_container, fragment)
                     .commit();
         }
+
     }
 
     @Override
@@ -101,4 +106,7 @@ public class ItemDetailActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
+
 }

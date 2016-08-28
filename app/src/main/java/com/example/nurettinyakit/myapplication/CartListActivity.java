@@ -9,15 +9,18 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
 import com.example.nurettinyakit.model.CartModel;
 import com.example.nurettinyakit.model.StockItem;
+import com.example.nurettinyakit.model.StockModel;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -52,12 +55,6 @@ public class CartListActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-
-                List<StockItem> list = CartModel.getItemsInCart();
-
-                for(int i=0; i<list.size(); i++){
-                    Log.d(" "+this.toString(), " items we got "+list.get(i).getUUID() + " object id "+list.get(i).toString() );
-                }
             }
         });
 
@@ -99,15 +96,36 @@ public class CartListActivity extends AppCompatActivity {
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.item_list_content, parent, false);
+                    .inflate(R.layout.cart_item_content, parent, false);
             return new ViewHolder(view);
         }
 
         @Override
         public void onBindViewHolder(final ViewHolder holder, int position) {
             holder.mItem = mValues.get(position);
-            holder.mIdView.setText(mValues.get(position).getItemName());
-            holder.mContentView.setText(mValues.get(position).getDescription());
+
+
+            int tumbWidth = getBaseContext().getResources().getInteger(R.integer.tumbnail_width);
+            int tumbHeight = getBaseContext().getResources().getInteger(R.integer.tumbnail_height);
+
+            Picasso.with(CartListActivity.this).load(holder.mItem.getItemImageUrl()).resize(tumbWidth,tumbHeight).into(holder.mItemImage);
+            holder.mNameView.setText(mValues.get(position).getItemName());
+            holder.mPriceView.setText(mValues.get(position).getItemPrice());
+            holder.mDescriptionView.setText(mValues.get(position).getDescription());
+
+            holder.mButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String uuid = holder.mItem.getUUID();
+                    CartModel.removeItem(StockModel.getItem(uuid));
+
+                    View recyclerView = findViewById(R.id.item_list);
+                    assert recyclerView != null;
+                    setupRecyclerView((RecyclerView) recyclerView);
+                }
+            }
+
+            );
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -141,21 +159,31 @@ public class CartListActivity extends AppCompatActivity {
 
         public class ViewHolder extends RecyclerView.ViewHolder {
             public final View mView;
-            public final TextView mIdView;
-            public final TextView mContentView;
+
+            public final ImageView mItemImage;
+            public final TextView mNameView;
+            public final TextView mPriceView;
+            public final TextView mDescriptionView;
+
             public StockItem mItem;
+            public ImageButton mButton;
 
             public ViewHolder(View view) {
                 super(view);
                 mView = view;
-                mIdView = (TextView) view.findViewById(R.id.id);
-                mContentView = (TextView) view.findViewById(R.id.content);
+
+                mItemImage = (ImageView) view.findViewById(R.id.iv_cart_row_image);
+                mNameView = (TextView) view.findViewById(R.id.tv_cart_row_name);
+                mPriceView = (TextView) view.findViewById(R.id.tv_cart_row_price);
+                mDescriptionView = (TextView) view.findViewById(R.id.tv_cart_row_description);
+                mButton = (ImageButton) view.findViewById(R.id.ib_cart_item_delete);
             }
 
             @Override
             public String toString() {
-                return super.toString() + " '" + mContentView.getText() + "'";
+                return super.toString() + " '" + mNameView.getText() + "'";
             }
+
         }
     }
 }
