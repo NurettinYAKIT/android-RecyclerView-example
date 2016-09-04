@@ -16,6 +16,7 @@
         card_view:cardCornerRadius="5dp">
 
         <RelativeLayout
+            android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
@@ -28,7 +29,9 @@
                 android:id="@+id/iv_cart_row_image"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginRight="20dp"/>
+                android:layout_marginRight="20dp"
+                android:layout_marginEnd="20dp"
+                />
 
             <LinearLayout
                 android:id="@+id/ll_card_row"
@@ -37,6 +40,7 @@
                 android:layout_centerVertical="true"
                 android:orientation="vertical"
                 android:layout_toRightOf="@+id/iv_cart_row_image"
+                android:layout_toEndOf="@+id/iv_cart_row_image"
                 >
                 <TextView
                     android:layout_marginTop="1dp"
@@ -55,7 +59,7 @@
                     android:id="@+id/tv_cart_row_price"
                     android:textStyle="bold"
                     android:textColor="@color/accent"
-                    android:layout_alignBottom="@+id/tv_cart_row_name" />
+                    />
 
                 <TextView
                     android:layout_marginTop="1dp"
@@ -64,7 +68,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/tv_cart_row_description"
                     android:textStyle="italic"
-                    android:layout_alignBottom="@+id/tv_cart_row_price" />
+                     />
 
             </LinearLayout>
 
@@ -74,6 +78,7 @@
                 android:layout_height="wrap_content"
                 android:src="@android:drawable/ic_menu_delete"
                 android:layout_toRightOf="@+id/ll_card_row"
+                android:layout_toEndOf="@+id/ll_card_row"
                 />
 
         </RelativeLayout>

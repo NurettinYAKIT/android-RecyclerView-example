@@ -36,5 +36,14 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:22.2.1'
     compile 'com.android.support:support-v4:22.2.1'
 
+    // Firebase Authentication
+    compile 'com.google.firebase:firebase-auth:9.4.0'
+    // Firebase Core
+    compile 'com.google.firebase:firebase-core:9.4.0'
+    // Google Sign In SDK (only required for Google Sign In)
+    compile 'com.google.android.gms:play-services-auth:9.4.0'
+
 
 }
+
+apply plugin: 'com.google.gms.google-services'
